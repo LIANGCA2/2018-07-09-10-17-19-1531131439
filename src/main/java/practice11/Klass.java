@@ -6,8 +6,8 @@ public class Klass {
     private Integer number;
     private Student leader;
     private ArrayList memberList = new ArrayList<Student>();
-    private ArrayList<Teacher> assignLeaderListenerList = new ArrayList<>();
-    private ArrayList<Teacher> joinClassListener = new ArrayList<>();
+    private ArrayList<AssignLeaderListener> assignLeaderListenerList = new ArrayList<>();
+    private ArrayList<JoinClassListener> joinClassListenerList = new ArrayList<>();
 
     public Student getLeader() {
         return leader;
@@ -51,14 +51,14 @@ public class Klass {
 
 
     public void notifyTeacherSomeoneJoinClass(Student student) {
-        for(int i = 0;i<joinClassListener.size();i++){
-            joinClassListener.get(i).saySomeoneJoinClass(student,this.number);
+        for(int i = 0;i<joinClassListenerList.size();i++){
+            joinClassListenerList.get(i).saySomeoneJoinClass(student,this.number);
             //  (assignLeaderListenerList.get(i)).sayAssignLeader(student,this.number);
         }
     }
 
-    public void registerJoinListener(Teacher teacher){
-        joinClassListener.add(teacher);
+    public void registerJoinListener(JoinClassListener joinClassListener){
+        joinClassListenerList.add(joinClassListener);
     }
     public void appendMember(Student student) {
         student.setKlass(this);
@@ -66,8 +66,8 @@ public class Klass {
         notifyTeacherSomeoneJoinClass(student);
     }
 
-    public void registerAssignLeaderListener(Teacher teacher){
-        assignLeaderListenerList.add(teacher);
+    public void registerAssignLeaderListener(AssignLeaderListener assignLeaderListener){
+        assignLeaderListenerList.add(assignLeaderListener);
     }
 
 }
